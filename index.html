@@ -3,183 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Complete | Smart Block</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>Verification Complete | Smart Block</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
-        /* --- SMART BLOCK V3 THEME SYSTEM --- */
+        /* --- MASTER LEVEL THEME --- */
         :root {
-            --bg-deep: #020617;       /* The main dark background */
-            --glass-bg: rgba(15, 23, 42, 0.6); /* Translucent Card */
-            --border-color: rgba(59, 130, 246, 0.2); /* Subtle Blue Border */
-            --primary-glow: #3b82f6;  /* Bright Blue Glow */
-            --text-white: #f8fafc;
-            --text-gray: #94a3b8;
+            --bg-deep: #020617;       /* Deepest Black-Blue */
+            --glass-bg: rgba(15, 23, 42, 0.7); /* Frosted Glass */
+            --border-glow: rgba(59, 130, 246, 0.3); /* Blue Outline */
+            --primary: #3b82f6;       /* Smart Block Blue */
+            --text-main: #ffffff;
+            --text-sub: #94a3b8;
         }
 
         body {
             margin: 0;
             height: 100vh;
             background-color: var(--bg-deep);
-            /* The "Cyber" Grid Background Effect */
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 60%);
-            background-size: 50px 50px, 50px 50px, 100% 100%;
             font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            /* Subtle Grid Background like your main site */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
         /* --- THE GLASS CARD --- */
         .card {
             background: var(--glass-bg);
-            backdrop-filter: blur(24px); /* Heavy Blur */
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-color);
-            padding: 60px 40px;
-            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            padding: 50px;
+            border-radius: 20px;
             text-align: center;
-            max-width: 440px;
+            max-width: 420px;
             width: 90%;
             position: relative;
-            box-shadow: 0 0 80px -20px rgba(59, 130, 246, 0.3); /* Blue Outer Glow */
-            animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 0 50px -10px rgba(59, 130, 246, 0.25); /* Blue Glow behind */
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         /* The Glowing Top Line */
-        .card::after {
+        .card::before {
             content: '';
             position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
+            top: 0; left: 20%; right: 20%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-glow), transparent);
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.8;
         }
 
-        /* --- SUCCESS ICON --- */
-        .icon-box {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1));
+        /* --- ICON --- */
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: rgba(59, 130, 246, 0.15);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
             border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
-        .check-icon {
-            width: 40px;
-            height: 40px;
-            stroke: #60a5fa;
+        .check-svg {
+            width: 35px;
+            height: 35px;
+            stroke: var(--primary);
             stroke-width: 3;
             stroke-linecap: round;
             stroke-linejoin: round;
             fill: none;
             stroke-dasharray: 100;
             stroke-dashoffset: 100;
-            animation: drawCheck 0.8s 0.4s forwards ease-in-out;
+            animation: drawCheck 0.6s 0.4s forwards ease-in-out;
         }
 
-        /* --- TYPOGRAPHY --- */
+        /* --- TEXT --- */
         h1 {
-            color: var(--text-white);
-            font-size: 32px;
-            font-weight: 800; /* Extra Bold */
-            margin: 0 0 12px;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            color: var(--primary-glow);
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            display: block;
+            color: var(--text-main);
+            font-size: 28px;
+            font-weight: 800; /* Extra Bold like your Logo */
+            margin: 0 0 10px;
+            letter-spacing: -0.5px;
         }
 
         p {
-            color: var(--text-gray);
+            color: var(--text-sub);
             font-size: 16px;
-            line-height: 1.6;
-            margin: 0 0 40px;
+            line-height: 1.5;
+            margin: 0 0 30px;
         }
 
-        /* --- THE BUTTON --- */
+        /* --- BUTTON --- */
         .btn {
-            background: #fff; /* White Button for contrast */
-            color: #0f172a;   /* Dark Text */
-            font-weight: 700;
+            background: var(--primary);
+            color: white;
             text-decoration: none;
-            padding: 16px 40px;
-            border-radius: 100px; /* Pill Shape */
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 8px;
             display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px -5px rgba(255, 255, 255, 0.2);
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -5px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
         }
 
         /* --- ANIMATIONS --- */
-        @keyframes floatUp {
-            from { opacity: 0; transform: translateY(40px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes drawCheck {
             to { stroke-dashoffset: 0; }
         }
-
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="icon-box">
-            <svg class="check-icon" viewBox="0 0 24 24">
+        <div class="icon-circle">
+            <svg class="check-svg" viewBox="0 0 24 24">
                 <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
         </div>
-        
-        <span class="subtitle">VERIFICATION SUCCESSFUL</span>
+
         <h1>Email Complete</h1>
-        <p>You are all set. Your account has been securely verified.<br>You can try it out now.</p>
+        <p>You are all set. <br>Your account is verified and you can try it out now.</p>
         
         <a href="#" onclick="window.close()" class="btn">Close Window</a>
     </div>
 
     <script>
-        // Professional Confetti Burst
+        // Trigger Professional Confetti
         window.onload = function() {
-            var end = Date.now() + (2 * 1000);
-            var colors = ['#3b82f6', '#60a5fa', '#ffffff']; // Blue & White theme
+            var duration = 2 * 1000;
+            var end = Date.now() + duration;
 
             (function frame() {
+                // Shoot from Left
                 confetti({
-                    particleCount: 3,
+                    particleCount: 5,
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
-                    colors: colors
+                    colors: ['#3b82f6', '#ffffff'] // Blue and White only
                 });
+                // Shoot from Right
                 confetti({
-                    particleCount: 3,
+                    particleCount: 5,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1 },
-                    colors: colors
+                    colors: ['#3b82f6', '#ffffff']
                 });
 
                 if (Date.now() < end) {
