@@ -3,187 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verified | Smart Block Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Email Complete | Smart Block</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
-        /* --- 1. PREMIUM DARK THEME --- */
+        /* --- SMART BLOCK V3 THEME SYSTEM --- */
         :root {
-            --bg-color: #030712; /* Deepest Blue/Black */
-            --card-bg: rgba(30, 41, 59, 0.4); /* Glass */
-            --primary: #3b82f6;
-            --accent: #60a5fa;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
+            --bg-deep: #020617;       /* The main dark background */
+            --glass-bg: rgba(15, 23, 42, 0.6); /* Translucent Card */
+            --border-color: rgba(59, 130, 246, 0.2); /* Subtle Blue Border */
+            --primary-glow: #3b82f6;  /* Bright Blue Glow */
+            --text-white: #f8fafc;
+            --text-gray: #94a3b8;
         }
 
         body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.15), transparent 25%);
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
             margin: 0;
+            height: 100vh;
+            background-color: var(--bg-deep);
+            /* The "Cyber" Grid Background Effect */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 60%);
+            background-size: 50px 50px, 50px 50px, 100% 100%;
+            font-family: 'Inter', sans-serif;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
-        /* --- 2. GLASSMORPHISM CARD --- */
+        /* --- THE GLASS CARD --- */
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px); /* Heavy Blur */
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            padding: 60px 40px;
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             text-align: center;
-            max-width: 420px;
+            max-width: 440px;
             width: 90%;
             position: relative;
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 10;
+            box-shadow: 0 0 80px -20px rgba(59, 130, 246, 0.3); /* Blue Outer Glow */
+            animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        /* Animated Border Glow (FIXED COMPATIBILITY) */
-        .card::before {
-            content: "";
+        /* The Glowing Top Line */
+        .card::after {
+            content: '';
             position: absolute;
-            inset: -1px;
-            border-radius: 25px;
-            padding: 1px;
-            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.6), transparent);
-            
-            /* Standard & Webkit Mask for Compatibility */
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            
-            pointer-events: none;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-glow), transparent);
         }
 
-        /* --- 3. ANIMATED CHECKMARK --- */
-        .icon-container {
+        /* --- SUCCESS ICON --- */
+        .icon-box {
             width: 80px;
             height: 80px;
-            background: rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1));
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin: 0 auto 24px;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-            animation: pulse 2s infinite;
+            justify-content: center;
+            margin: 0 auto 30px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
-        .check-svg {
+        .check-icon {
             width: 40px;
             height: 40px;
-            stroke: var(--accent);
+            stroke: #60a5fa;
             stroke-width: 3;
             stroke-linecap: round;
             stroke-linejoin: round;
             fill: none;
             stroke-dasharray: 100;
             stroke-dashoffset: 100;
-            animation: drawCheck 0.6s 0.4s ease forwards;
+            animation: drawCheck 0.8s 0.4s forwards ease-in-out;
         }
 
-        /* --- 4. TEXT & BUTTON --- */
+        /* --- TYPOGRAPHY --- */
         h1 {
-            color: var(--text-main);
-            font-size: 28px;
-            font-weight: 800;
+            color: var(--text-white);
+            font-size: 32px;
+            font-weight: 800; /* Extra Bold */
             margin: 0 0 12px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--primary-glow);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            display: block;
         }
 
         p {
-            color: var(--text-sub);
+            color: var(--text-gray);
             font-size: 16px;
             line-height: 1.6;
-            margin: 0 0 32px;
+            margin: 0 0 40px;
         }
 
+        /* --- THE BUTTON --- */
         .btn {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
+            background: #fff; /* White Button for contrast */
+            color: #0f172a;   /* Dark Text */
+            font-weight: 700;
             text-decoration: none;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-weight: 600;
+            padding: 16px 40px;
+            border-radius: 100px; /* Pill Shape */
             display: inline-block;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 20px -5px rgba(255, 255, 255, 0.2);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(255, 255, 255, 0.4);
         }
 
         /* --- ANIMATIONS --- */
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes drawCheck {
             to { stroke-dashoffset: 0; }
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-            70% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="icon-container">
-            <svg class="check-svg" viewBox="0 0 24 24">
+        <div class="icon-box">
+            <svg class="check-icon" viewBox="0 0 24 24">
                 <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
         </div>
-        <h1>Email Verified</h1>
-        <p>Your account is successfully activated.<br>You can now return to the extension.</p>
-        <a href="#" onclick="window.close()" class="btn">Return to Dashboard</a>
+        
+        <span class="subtitle">VERIFICATION SUCCESSFUL</span>
+        <h1>Email Complete</h1>
+        <p>You are all set. Your account has been securely verified.<br>You can try it out now.</p>
+        
+        <a href="#" onclick="window.close()" class="btn">Close Window</a>
     </div>
 
     <script>
-        // Trigger Confetti Explosion on Load
+        // Professional Confetti Burst
         window.onload = function() {
-            var duration = 3 * 1000;
-            var animationEnd = Date.now() + duration;
-            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+            var end = Date.now() + (2 * 1000);
+            var colors = ['#3b82f6', '#60a5fa', '#ffffff']; // Blue & White theme
 
-            function random(min, max) {
-              return Math.random() * (max - min) + min;
-            }
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
 
-            var interval = setInterval(function() {
-              var timeLeft = animationEnd - Date.now();
-
-              if (timeLeft <= 0) {
-                return clearInterval(interval);
-              }
-
-              var particleCount = 50 * (timeLeft / duration);
-              
-              // Shoot confetti from left and right
-              confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
-              confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
-            }, 250);
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
         };
     </script>
 </body>
